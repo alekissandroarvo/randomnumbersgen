@@ -30,11 +30,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int var1 = 0;
-  int var2 = 6;
+  int max = 6;
+  int min=0;
 
   void _randomGenerator() {
     setState(() {
-      var1 = intValue.nextInt(var2) + 1;
+      var1 = intValue.nextInt(max-min+1) + min;
     });
   }
 
@@ -49,6 +50,21 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
+              'Inserir limite inferior para número aleatório:',
+              style: TextStyle(fontSize: 20),
+            ),
+            SizedBox(
+              width: 50,
+              child: TextFormField(
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 20),
+                onChanged: (value) {
+                  min = int.parse(value);
+                },
+              ),
+            ),
+            const SizedBox(height: 20,),
+            const Text(
               'Inserir limite superior para número aleatório:',
               style: TextStyle(fontSize: 20),
             ),
@@ -58,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 20),
                 onChanged: (value) {
-                  var2 = int.parse(value);
+                  max = int.parse(value);
                 },
               ),
             ),
@@ -66,7 +82,7 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.all(10),
               child: Text(
-                'Pressione o Botão para gerar número entre 1 e $var2',
+                'Pressione o Botão para gerar número entre $min e $max',
                 style: const TextStyle(fontSize: 20),
               ),
             ),
